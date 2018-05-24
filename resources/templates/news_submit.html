@@ -1,0 +1,57 @@
+<form method="POST" action="news.php?action=POST&nid={$item['nid']}">
+    <input type="hidden" name="nid" id="nid" value="{$item['nid']}" />
+    <table class="tborder" cellspacing="0" cellpadding="5" border="0">
+        <thead>
+            <tr>
+                <td class="thead" colspan="2">
+                    <div>
+                        <strong>{$lang->news_submit}</strong>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="trow1">
+                <td>
+                    <label for="text">{$lang->news_title}</label>
+                </td>
+                <td>
+                    <input class="textbox" name="title" id="title" maxlength="255" value="{$item['title']}" required />
+                </td>
+            </tr>
+            <tr class="trow1">
+                <td>
+                    <label for="text">{$lang->news_text}</label>
+                </td>
+                <td>
+                    <input class="textbox" name="text" id="text" maxlength="255" value="{$item['text']}" required />
+                </td>
+            </tr>
+            <tr class="trow1">
+                <td>
+                    <label for="tid">{$lang->news_tid}</label>
+                </td>
+                <td>
+                    <input class="textbox" name="tid" id="tid" maxlength="255" value="{$item['tid']}" {$required} />
+                </td>
+            </tr>
+            <tr class="trow1">
+                <td>
+                    <label for="tags">{$lang->news_tags}</label>
+                </td>
+                <td>
+                    <select class="input" name="tags[]" id="tags" multiple size="5">
+                        {$tag_options}
+                    </select>
+                </td>
+            </tr>
+            <tr class="trow1">
+                <td></td>
+                <td>
+                    <input type="submit" value="{$lang->news_submit}" class="button" />
+                </td>
+            </tr>
+            {$important}
+        </tbody>
+    </table>
+</form>

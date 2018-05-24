@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>{$mybb->settings['bbname']} - {$lang->news}</title>
+    {$headerinclude}
+    <link rel="stylesheet" href="{$mybb->asset_url}/inc/plugins/news/assets/style.css">
+</head>
+
+<body>
+    {$header} {$errors} {$multipage}
+
+    <b>{$lang->news_filters}:</b> {$tags}
+
+    <br />
+    <br />
+
+    <table class="tborder" cellspacing="0" cellpadding="5" border="0">
+        <thead>
+            <tr>
+                <td class="thead" colspan="1">
+                    <div>
+                        <strong>{$lang->news}</strong>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {$news}
+        </tbody>
+    </table>
+    {$multipage}
+
+    <br/> {$news_submit} {$footer}
+</body>
+
+</html>
