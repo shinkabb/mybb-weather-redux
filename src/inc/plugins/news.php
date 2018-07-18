@@ -11,18 +11,22 @@
  * @link     https://github.com/ShinkaDev-MyBB/mybb-news
  */
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 if (!defined('IN_MYBB')) {
     die('You Cannot Access This File Directly. Please Make Sure IN_MYBB Is Defined.');
 }
 
-// if (defined('IN_ADMINCP')) {
-//     require_once MYBB_ROOT . 'inc/plugins/news/install.php';
-//     require_once MYBB_ROOT . 'inc/plugins/news/admin.php';
-// } else {
-//     require_once MYBB_ROOT . 'inc/plugins/news/forum.php';
-// }
+if (defined('IN_ADMINCP')) {
+    require_once MYBB_ROOT . 'inc/plugins/Shinka/News/src/Plugin.php';
+    // require_once MYBB_ROOT . 'inc/plugins/news/admin.php';
+} else {
+    // require_once MYBB_ROOT . 'inc/plugins/news/forum.php';
+}
 
 defined('MYBBSTUFF_CORE_PATH') or define('MYBBSTUFF_CORE_PATH', MYBB_ROOT . 'inc/plugins/MybbStuff/Core');
+defined('SHINKA_CORE_PATH') or define('SHINKA_CORE_PATH', MYBB_ROOT . 'inc/plugins/Shinka/Core');
 defined('SHINKA_QUERYBUILDER_PATH') or define('SHINKA_QUERYBUILDER_PATH', MYBB_ROOT . 'inc/plugins/Shinka/QueryBuilder');
 define('SHINKA_NEWS_PATH', MYBB_ROOT . 'inc/plugins/Shinka/News');
 
@@ -33,6 +37,11 @@ $classLoader = new MybbStuff_Core_ClassLoader();
 $classLoader->registerNamespace(
     'Shinka_News',
     array(SHINKA_NEWS_PATH . '/src')
+);
+
+$classLoader->registerNamespace(
+    'Shinka_Core',
+    array(SHINKA_CORE_PATH . '/src')
 );
 
 $classLoader->registerNamespace(

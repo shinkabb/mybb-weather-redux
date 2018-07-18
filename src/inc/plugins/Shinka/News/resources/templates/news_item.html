@@ -1,0 +1,16 @@
+<tr class="trow1 important-{$news['important']}">
+    <td>
+        <div style="float: right;">
+            {$mark_as} {$delete}
+        </div>
+        {$important} {$news['tags']}
+        <a href="news.php?nid={$news['nid']}">
+            <b>{$news['headline']}</b>
+        </a>
+
+        <br/> {$lang->by}
+        <a href="member.php?action=profile&uid={$news['uid']}">{$news['username']}</a>
+        {$lang->on} {$news['created_at']}
+        <br/> {$news['text']} {$news}
+    </td>
+</tr>
