@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once 'UnitTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
 
-final class TemplateGroupTest extends UnitTest
+final class TemplateGroupTest extends Test
 {
     protected $values;
 

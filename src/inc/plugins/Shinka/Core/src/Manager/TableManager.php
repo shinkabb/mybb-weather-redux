@@ -11,7 +11,7 @@ class Shinka_Core_Manager_TableManager extends Shinka_Core_Manager_Manager
 
         foreach (self::toArray($tables) as $table) {
             if ($db->table_exists($table->name)) {
-                return;
+                return -1;
             }
 
             $definition_strs = implode(', ', $table->definitions);
@@ -29,7 +29,7 @@ class Shinka_Core_Manager_TableManager extends Shinka_Core_Manager_Manager
     {
         global $db;
 
-        foreach ((array) $tables as $table) {
+        foreach (self::toArray($tables) as $table) {
             $name = $table instanceof Shinka_Core_Entity_Table ? $table->name : $table;
             $db->drop_table($name);
         }

@@ -15,7 +15,9 @@ class Shinka_Core_Manager_TemplateGroupManager extends Shinka_Core_Manager_Manag
         foreach (self::toArray($template_groups) as $group) {
             $db->insert_query(self::$table, $group->toArray());
 
-            Shinka_Core_Manager_TemplateManager::create($group->asset_dir);
+            if ($group->asset_dir) {
+                Shinka_Core_Manager_TemplateManager::create($group->asset_dir);
+            }
         }
     }
 

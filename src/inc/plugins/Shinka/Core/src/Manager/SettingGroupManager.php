@@ -18,7 +18,7 @@ class Shinka_Core_Manager_SettingGroupManager extends Shinka_Core_Manager_Manage
     /**
      * @param string|string[]|Shinka_Core_Entity_SettingGroup|Shinka_Core_Entity_SettingGroup[] $setting_groups
      */
-    public function destroy($setting_groups)
+    public static function destroy($setting_groups)
     {
         global $db;
 

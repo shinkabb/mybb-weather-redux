@@ -11,8 +11,8 @@
  * @link     https://github.com/ShinkaDev-MyBB/mybb-news
  */
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 if (!defined('IN_MYBB')) {
     die('You Cannot Access This File Directly. Please Make Sure IN_MYBB Is Defined.');

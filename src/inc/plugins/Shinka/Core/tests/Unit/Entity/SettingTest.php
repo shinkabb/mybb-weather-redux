@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once 'UnitTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
 
-final class SettingGroupTest extends UnitTest
+final class SettingTest extends Test
 {
     protected $values;
 
@@ -14,8 +14,9 @@ final class SettingGroupTest extends UnitTest
             'name' => 'Test Name',
             'title' => 'Test Title',
             'description' => 'Test Description',
+            'optionscode' => 'yesno',
+            'value' => 'yes',
             'disporder' => 1,
-            'isdefault' => 1,
             'gid' => 2
         );
     }
@@ -23,17 +24,18 @@ final class SettingGroupTest extends UnitTest
     public function testCreate()
     {
         $v = $this->values;
-        $entity = new Shinka_Core_Entity_SettingGroup(
+        $entity = new Shinka_Core_Entity_Setting(
             $v['name'],
             $v['title'],
             $v['description'],
+            $v['optionscode'],
+            $v['value'],
             $v['disporder'],
-            $v['isdefault'],            
             $v['gid']
         );
 
         $this->assertInstanceOf(
-            Shinka_Core_Entity_SettingGroup::class,
+            Shinka_Core_Entity_Setting::class,
             $entity
         );
 
@@ -49,38 +51,34 @@ final class SettingGroupTest extends UnitTest
     {
         $v = $this->values;
 
-        $entity = new Shinka_Core_Entity_SettingGroup(
+        $entity = new Shinka_Core_Entity_Setting(
             $v['name'],
             $v['title'],
             $v['description'],
-            null,
+            $v['optionscode'],
+            $v['value'],
             null,
             null
         );
 
         $this->assertEquals(
             $entity->disporder,
-            Shinka_Core_Entity_SettingGroup::DEFAULTS['disporder']
-        );
-
-        $this->assertEquals(
-            $entity->isdefault,
-            Shinka_Core_Entity_SettingGroup::DEFAULTS['isdefault']
+            Shinka_Core_Entity_Setting::DEFAULTS['disporder']
         );
 
         $this->assertEquals(
             $entity->gid,
-            Shinka_Core_Entity_SettingGroup::DEFAULTS['gid']
+            Shinka_Core_Entity_Setting::DEFAULTS['gid']
         );
     }
 
     public function testFromArray()
     {
         $v = $this->values;
-        $entity = Shinka_Core_Entity_SettingGroup::fromArray($v);
+        $entity = Shinka_Core_Entity_Setting::fromArray($v);
 
         $this->assertInstanceOf(
-            Shinka_Core_Entity_SettingGroup::class,
+            Shinka_Core_Entity_Setting::class,
             $entity
         );
 
@@ -95,7 +93,7 @@ final class SettingGroupTest extends UnitTest
     public function testToArray()
     {
         $v = $this->values;
-        $entity = Shinka_Core_Entity_SettingGroup::fromArray($v)->toArray();
+        $entity = Shinka_Core_Entity_Setting::fromArray($v)->toArray();
 
         $this->assertEquals(
             $entity,

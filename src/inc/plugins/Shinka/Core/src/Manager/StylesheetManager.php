@@ -28,7 +28,7 @@ class Shinka_Core_Manager_StylesheetManager extends Shinka_Core_Manager_Manager
     /**
      * @param Shinka_Core_Entity_Stylesheet|Shinka_Core_Entity_Stylesheet[] $stylesheets
      */
-    public function destroy($stylesheets)
+    public static function destroy($stylesheets)
     {
         require_once MYBB_ROOT . "admin/inc/functions_themes.php";
         global $db;

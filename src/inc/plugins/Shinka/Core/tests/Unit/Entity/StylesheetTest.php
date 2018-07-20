@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once 'UnitTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
 
-final class StylesheetTest extends UnitTest
+final class StylesheetTest extends Test
 {
     protected $values;
 
@@ -65,7 +65,7 @@ final class StylesheetTest extends UnitTest
 
     public function testFromDirectory()
     {
-        $entities = Shinka_Core_Entity_Stylesheet::fromDirectory(MYBB_ROOT . "tests/stylesheets");
+        $entities = Shinka_Core_Entity_Stylesheet::fromDirectory(MYBB_ROOT . "inc/plugins/Shinka/Core/tests/data/stylesheets");
 
         foreach ($entities as $ndx => $entity) {
             $this->assertInstanceOf(
@@ -99,6 +99,19 @@ final class StylesheetTest extends UnitTest
             $entity->toArray(),
             $v
         );
+    }
+
+    public function testFromArray()
+    {
+        $v = $this->values;
+        $entity = Shinka_Core_Entity_Stylesheet::fromArray($v);
+
+        foreach ($v as $key => $value) {
+            $this->assertEquals(
+                $entity->$key,
+                $value
+            );
+        }
     }
 }
 
