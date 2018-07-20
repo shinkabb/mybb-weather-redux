@@ -41,8 +41,12 @@ Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) a
 $ ./shinka.sh link <mybb_path>
 # Destroys symbolic links
 $ ./shinka.sh unlink <mybb_path>
+# Runs tests
+$ ./shinka.sh test <mybb_path>
 # Bundles src files for release
 $ ./shinka.sh release [-v <version> | --version <version>] [-V <vendor> | --vendor <vendor>] [-c <code> | --code <code>]
+# Lists available commands
+$ ./shinka.sh --help
 ```
 
 ### Local Setup

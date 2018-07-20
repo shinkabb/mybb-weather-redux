@@ -2,7 +2,7 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
 
-final class StylesheetManagerTest extends IntegrationTest
+final class Shinka_Core_Test_Integration_Manager_StylesheetManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "themestylesheets";
     protected $entity = Shinka_Core_Entity_Stylesheet;

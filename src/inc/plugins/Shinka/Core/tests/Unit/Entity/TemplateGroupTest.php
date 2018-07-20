@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
 
-final class TemplateGroupTest extends Test
+final class Shinka_Core_Test_Unit_Entity_TemplateGroupTest extends Shinka_Core_Test_Test
 {
     protected $values;
 

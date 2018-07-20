@@ -2,7 +2,7 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
 
-final class TemplateGroupManagerTest extends IntegrationTest
+final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "templategroups";
     protected $entity = Shinka_Core_Entity_TemplateGroup;

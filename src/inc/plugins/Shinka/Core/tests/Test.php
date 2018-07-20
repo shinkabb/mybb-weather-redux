@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class Test extends TestCase
+class Shinka_Core_Test_Test extends TestCase
 {
     /**
      * @before

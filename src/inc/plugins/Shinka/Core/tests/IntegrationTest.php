@@ -5,7 +5,7 @@ require_once getcwd() . '/inc/functions.php';
 require_once getcwd() . '/inc/db_base.php';
 require_once getcwd() . '/inc/db_mysqli.php';
 
-class IntegrationTest extends Test
+class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
 {
     protected function entity(array $values = array())
     {

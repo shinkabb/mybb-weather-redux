@@ -2,7 +2,7 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
 
-final class TemplateManagerTest extends IntegrationTest
+final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "templates";
     protected $entity = Shinka_Core_Entity_Template;
@@ -35,7 +35,7 @@ final class TemplateManagerTest extends IntegrationTest
     public function testDestroy()
     {
         Shinka_Core_Manager_TemplateManager::create($this->asset_dir);
-        
+
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateManager::destroy($this->prefixes[0]);
         $newCount = $this->countEntities();

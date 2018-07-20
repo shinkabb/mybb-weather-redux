@@ -1,5 +1,16 @@
 #!/bin/sh
 
+usage()
+{
+	echo "Usage: $0 <command>"
+	echo
+	echo "  link      Create symbolic links for plugin files and directories."
+	echo "  unlink    Destroy symbolic links for plugin files and directories."
+	echo "  relink    Destroy and create symbolic links for plugin files and directories."
+	echo "  release   Bundle source files for release."
+	echo "  test      Navigate to MyBB root and run PHPUnit tests."
+}
+
 link_usage()
 {
 	echo "Usage: $0 link <mybb_path>"
@@ -12,6 +23,14 @@ unlink_usage()
 {
 	echo "Usage: $0 unlink <mybb_path>"
 	echo "Destroy symbolic links for plugin files and directories."
+	echo
+	echo "  <mybb_path>    Absolute path to MyBB installation"
+}
+
+relink_usage()
+{
+	echo "Usage: $0 unlink <mybb_path>"
+	echo "Destroy and recreate symbolic links for plugin files and directories."
 	echo
 	echo "  <mybb_path>    Absolute path to MyBB installation"
 }
@@ -48,6 +67,9 @@ make_symlinks()
 			-f | --force)
 				FORCE="-f"
 				shift;;
+			-h | --help)
+				link_usage
+				exit 1;;
 			*)
 				MYBB_BASE=$1
 				shift;;
@@ -80,8 +102,24 @@ make_symlinks()
 
 destroy_symlinks()
 {
-	MYBB_BASE=$1;
-	if [ $1 ]
+	MYBB_BASE=""
+	FORCE=""
+	while [[ $# -gt 0 ]]
+	do
+		case "$1" in
+			-f | --force)
+				FORCE="-f"
+				shift;;
+			-h | --help)
+				unlink_usage
+				exit 1;;
+			*)
+				MYBB_BASE=$1
+				shift;;
+		esac
+	done
+
+	if [ $MYBB_BASE ]
 	then
 		rm "$MYBB_BASE/news.php"
 		echo "Unlinked news.php"
@@ -103,6 +141,25 @@ destroy_symlinks()
 	else
 		unlink_usage
 	fi	
+}
+
+relink_symlinks()
+{
+	ARGS=$@
+
+	while [[ $# -gt 0 ]]
+	do
+		case "$1" in
+			-h | --help)
+				relink_usage
+				exit 1;;
+			*)
+				shift;;
+		esac
+	done
+
+	destroy_symlinks $ARGS
+	make_symlinks $ARGS
 }
 
 release()
@@ -168,16 +225,18 @@ test()
 
 case $1 in
 	link)
+		shift
 		make_symlinks $@
 		break
 		;;
 	unlink)
-		destroy_symlinks $2
+		shift
+		destroy_symlinks $@
 		break
 		;;
 	relink)
-		destroy_symlinks $2
-		make_symlinks $2
+		shift
+		relink_symlinks $@
 		break
 		;;
 	test)
@@ -190,7 +249,7 @@ case $1 in
 		break
 		;;
 	*)
-		echo "Sorry, I don't understand"
+		usage
 		break
 		;;
 esac

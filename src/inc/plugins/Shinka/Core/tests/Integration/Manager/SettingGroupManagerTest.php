@@ -2,7 +2,7 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
 
-final class SettingGroupManagerTest extends IntegrationTest
+final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "settinggroups";
     protected $entity = Shinka_Core_Entity_SettingGroup;
