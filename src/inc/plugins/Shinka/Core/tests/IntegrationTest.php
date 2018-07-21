@@ -7,12 +7,6 @@ require_once getcwd() . '/inc/db_mysqli.php';
 
 class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
 {
-    protected function entity(array $values = array())
-    {
-        return $this->entity::fromArray(
-            array_merge($this->values, $values)
-        );
-    }
 
     protected function countFiles(string $dir)
     {
@@ -44,6 +38,14 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
         $cache = new datacache;
     }
 
+    protected static function setupTemplates()
+    {
+        global $templates;
+        require_once MYBB_ROOT.'inc/class_templates.php';
+
+        $templates = new templates;
+    }
+
     protected static function setupDatabase()
     {
         require getcwd() . '/inc/plugins/Shinka/Core/tests/data/config/database.php';
@@ -58,8 +60,12 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
 
     protected function setUp()
     {
+        parent::setUp();
+
+        defined("TIME_NOW") or define("TIME_NOW", time());
         self::setupMyBB();
         self::setupDatabase();
         self::setupCache();
+        self::setupTemplates();
     }
 }

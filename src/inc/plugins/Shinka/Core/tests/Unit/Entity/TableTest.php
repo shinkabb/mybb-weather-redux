@@ -10,6 +10,7 @@ final class Shinka_Core_Test_Unit_Entity_TableTest extends Shinka_Core_Test_Test
 
     protected function setUp()
     {
+        parent::setUp();
         $this->values = array(
             'name' => 'Test Name',
             'definitions' => array(

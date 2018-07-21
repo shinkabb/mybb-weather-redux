@@ -12,57 +12,62 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
 
     /** @var string Base query for news */
     private static $query = 'SELECT news.nid, news.headline, news.text, news.tid, news.uid, news.tags, news.pinned, ' .
-        'news.status, user.uid, user.username, user.usergroup, user.displaygroup, thread.subject ' .
+        'news.status, news.created_at, user.uid, user.username, user.usergroup, user.displaygroup, thread.subject ' .
         'FROM ' . TABLE_PREFIX . 'news news ' .
         'LEFT JOIN ' . TABLE_PREFIX . 'threads thread ON thread.tid = news.tid ' .
-        'INNER JOIN ' . TABLE_PREFIX . 'users user ON user.uid = news.uid ';
+        'LEFT JOIN ' . TABLE_PREFIX . 'users user ON user.uid = news.uid ';
 
     /**
-     * @return
+     * @param Shinka_News_Entity_News|Shinka_News_Entity_News[] $newses
      */
-    public static function create(Shinka_News_Entity_News $newses)
+    public static function create($newses)
     {
         global $db;
+        
+        foreach (self::toArray($newses) as &$news) {
+            $nid = $db->insert_query(self::$table, $news->forInsert());
+            $news->nid = $nid;
+        }
+
+        return $newses;
+    }
+
+    /**
+     * @param Shinka_News_Entity_News|Shinka_News_Entity_News[]|int|int[] $nids
+     */
+    public static function destroy($newses)
+    {
+        global $db;
+
         foreach (self::toArray($newses) as $news) {
-            $db->insert_query(self::$table, $news->toArray());
+            $nid = $news instanceof Shinka_News_Entity_News ? $news->nid : $news;
+            $db->delete_query(self::$table, "nid = $nid", 1);
         }
     }
 
-    public static function destroy(array $nids)
+    public static function findSimple(int $nid, string $fields = "*")
     {
         global $db;
-        foreach (self::toArray($nids) as $nid) {
-            $db->delete_query("nid = $nid", 1);
-        }
-    }
 
-    public static function destroyItems(array $news)
-    {
-        global $db;
-        foreach ($news as $n) {
-            $this->destroyItem($n);
-        }
-    }
-
-    public static function findSimple(integer $nid, string $fields = "*")
-    {
-        global $db;
-        return $db->simple_select($fields, "nid = $nid", array(
+        $query = $db->simple_select(self::$table, $fields, "nid = $nid", array(
             "limit" => 1,
         ));
+
+        return Shinka_News_Entity_News::fromArray($db->fetch_array($query));
     }
 
-    public static function find(integer $nid)
+    public static function find(int $nid)
     {
         global $db;
-        $query = self::$query . " WHERE news.nid = $nid";
-        return $db->write_query(self::$query);
+        $query = self::$query . " WHERE news.nid = $nid" . 'LIMIT 1';
+        $query = $db->write_query(self::$query);
+        return self::toObj($db->fetch_array($query));
     }
 
     /**
      * @param string|string[] $tags
      */
-    public static function findByTag($tags, string $fields = "*")
+    public static function findByTag($tags)
     {
         global $db;
         $query = self::$query . " WHERE news.nid = $nid";
@@ -72,12 +77,41 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
     public static function all()
     {
         global $db;
-        return $db->write_query(self::$query);
+
+        $query = $db->write_query(self::$query);
+        while ($row = $db->fetch_array($query)) {
+            $newses[] = $row;
+        }
+
+        return $newses;
     }
 
     public static function count()
     {
         global $db;
-        return $db->simple_select("COUNT(news.nid)", array());
+        $query = $db->simple_select(self::$table, "COUNT(nid) as count", "", array());
+        return $db->fetch_field($query, "count");
+    }
+
+    private static function toObj(array $arr)
+    {
+        $news = array(
+            'nid' => $arr['nid'],
+            'headline' => $arr['headline'],
+            'text' => $arr['text'],
+            'pinned' => !!$arr['pinned'],
+            'status' => $arr['status'],
+            'created_at' => $arr['created_at'],
+            'thread' => $arr['tid'] ? array(
+                'tid' => $arr['tid'],
+                'subject' => $arr['subject']
+            ) : array(),
+            'user' => $arr['uid'] ? array(
+                'uid' => $arr['uid'],
+                'username' => $arr['username']
+            ) : array()
+        );
+
+        return Shinka_News_Entity_News::fromArray($news);
     }
 }

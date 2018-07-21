@@ -10,6 +10,7 @@ final class Shinka_Core_Test_Unit_Entity_TemplateGroupTest extends Shinka_Core_T
 
     protected function setUp()
     {
+        parent::setUp();
         $this->values = array(
             'asset_dir' => 'Test Name',
             'prefix' => 'Test prefix',

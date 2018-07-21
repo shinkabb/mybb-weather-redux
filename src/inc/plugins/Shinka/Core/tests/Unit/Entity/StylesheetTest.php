@@ -10,6 +10,7 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
 
     protected function setUp()
     {
+        parent::setUp();
         $this->values = array(
             'stylesheet' => 'Test stylesheet',
             'name' => 'Test Name',
