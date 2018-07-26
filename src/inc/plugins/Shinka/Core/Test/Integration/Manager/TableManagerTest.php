@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
 final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka_Core_Test_IntegrationTest
 {

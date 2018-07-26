@@ -12,7 +12,7 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
 
     /** @var string Base query for news */
     private static $query = 'SELECT news.nid, news.headline, news.text, news.tid, news.uid, news.tags, news.pinned, ' .
-        'news.status, news.created_at, user.uid, user.username, user.usergroup, user.displaygroup, thread.subject ' .
+        'news.status, news.created_at, user.username, user.usergroup, user.displaygroup, thread.subject ' .
         'FROM ' . TABLE_PREFIX . 'news news ' .
         'LEFT JOIN ' . TABLE_PREFIX . 'threads thread ON thread.tid = news.tid ' .
         'LEFT JOIN ' . TABLE_PREFIX . 'users user ON user.uid = news.uid ';
@@ -52,8 +52,7 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
         $query = $db->simple_select(self::$table, $fields, "nid = $nid", array(
             "limit" => 1,
         ));
-
-        return Shinka_News_Entity_News::fromArray($db->fetch_array($query));
+        return self::toObj($db->fetch_array($query));
     }
 
     public static function find(int $nid)
@@ -71,7 +70,8 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
     {
         global $db;
         $query = self::$query . " WHERE news.nid = $nid";
-        return $db->write_query(self::$query);
+        $query = $db->write_query($query);
+        return self::toObj($db->fetch_array($query));
     }
 
     public static function all()
@@ -80,7 +80,7 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
 
         $query = $db->write_query(self::$query);
         while ($row = $db->fetch_array($query)) {
-            $newses[] = $row;
+            $newses[] = self::toObj($row);
         }
 
         return $newses;

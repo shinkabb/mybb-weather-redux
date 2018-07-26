@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
 final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extends Shinka_Core_Test_IntegrationTest
 {
@@ -56,7 +56,7 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
     public function testCreateTemplates()
     {
         $entity = $this->entities[0];
-        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/tests/data/templates';
+        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/data/templates';
 
         $originalCount = $this->countEntities("templates");
         Shinka_Core_Manager_TemplateGroupManager::create($entity);
@@ -124,7 +124,7 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
     {
         $entity = $this->entity();
 
-        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/tests/data/templates';
+        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/data/templates';
         Shinka_Core_Manager_TemplateGroupManager::create($entity);
 
         $originalCount = $this->countEntities("templates");

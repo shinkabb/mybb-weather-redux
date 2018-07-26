@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 require_once getcwd() . '/inc/functions.php';
 require_once getcwd() . '/inc/db_base.php';
 require_once getcwd() . '/inc/db_mysqli.php';
@@ -46,9 +46,17 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
         $templates = new templates;
     }
 
+    protected static function setupPlugins()
+    {
+        global $templates;
+        require_once MYBB_ROOT.'inc/class_plugins.php';
+
+        $plugins = new plugins;
+    }
+
     protected static function setupDatabase()
     {
-        require getcwd() . '/inc/plugins/Shinka/Core/tests/data/config/database.php';
+        require getcwd() . '/inc/plugins/Shinka/Core/Test/data/config/database.php';
         global $db;
 
         $db = new DB_MySQLi;

@@ -1,7 +1,7 @@
 <?php
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 
 final class Shinka_Core_Test_Integration_DatabaseTest extends Shinka_Core_Test_IntegrationTest
 {

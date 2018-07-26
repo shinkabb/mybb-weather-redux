@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 
 final class Shinka_Core_Test_Unit_Entity_TableTest extends Shinka_Core_Test_Test
 {

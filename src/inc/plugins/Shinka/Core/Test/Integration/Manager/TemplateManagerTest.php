@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
 final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shinka_Core_Test_IntegrationTest
 {
@@ -12,7 +12,7 @@ final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shi
     protected function setUp()
     {
         parent::setUp();
-        $this->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/tests/data/templates';
+        $this->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/data/templates';
         $this->prefixes = array("prefix");
     }
 

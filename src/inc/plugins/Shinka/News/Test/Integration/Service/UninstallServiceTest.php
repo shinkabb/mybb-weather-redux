@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/IntegrationTest.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
 final class Shinka_News_Test_Integration_Service_UninstallServiceTest extends Shinka_Core_Test_IntegrationTest
 {

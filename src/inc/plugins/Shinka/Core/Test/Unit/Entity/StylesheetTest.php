@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once getcwd() . '/inc/plugins/Shinka/Core/tests/Test.php';
+require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 
 final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test_Test
 {
@@ -66,7 +66,7 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
 
     public function testFromDirectory()
     {
-        $entities = Shinka_Core_Entity_Stylesheet::fromDirectory(MYBB_ROOT . "inc/plugins/Shinka/Core/tests/data/stylesheets");
+        $entities = Shinka_Core_Entity_Stylesheet::fromDirectory(MYBB_ROOT . "inc/plugins/Shinka/Core/Test/data/stylesheets");
 
         foreach ($entities as $ndx => $entity) {
             $this->assertInstanceOf(

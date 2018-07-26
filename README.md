@@ -4,7 +4,7 @@ Call out important threads with a terse headline and description.
 
 ## Installation
 
-Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) and unzip it in the root of your MyBB installation.
+Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) and unzip in the root of your MyBB installation.
 
 ## Requirements
 
@@ -32,24 +32,26 @@ Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) a
 ![alt text](https://github.com/ShinkaDev-MyBB/News/blob/master/docs/submit.PNG "Submit News")
 ![alt text](https://github.com/ShinkaDev-MyBB/News/blob/master/docs/settings.PNG "Settings")
 
-## Development
+### Contributing
 
-### Shell Scripts
+#### Shell Scripts
 
 ```bash
-# Creates symbolic links for src files in MyBB installation
+# Creates hard links for src files in MyBB installation
 $ ./shinka.sh link <mybb_path>
-# Destroys symbolic links
+# Destroys hard links
 $ ./shinka.sh unlink <mybb_path>
 # Runs tests
-$ ./shinka.sh test <mybb_path>
+$ ./shinka.sh test <mybb_path> [-d <test_path>]
 # Bundles src files for release
 $ ./shinka.sh release [-v <version> | --version <version>] [-V <vendor> | --vendor <vendor>] [-c <code> | --code <code>]
 # Lists available commands
 $ ./shinka.sh --help
+# Shows usage and options for command
+$ ./shinka.sh <command> --help
 ```
 
-### Local Setup
+#### Local Setup
 
 ```bash
 $ git clone https://github.com/ShinkaDev-MyBB/News.git
@@ -57,7 +59,22 @@ $ cd News
 $ ./shinka.sh link path/to/mybb/root
 ```
 
-### Release
+#### Testing
+
+Copy `src/inc/plugins/Shinka/Core/Test/data/config/database.example.php` to `src/inc/plugins/Shinka/Core/Test/data/config/database.php` and update file to match your test database.
+
+**Do not run on prod database.** Tables are truncated during testing.
+
+```bash
+# Run all tests
+$ ./shinka.sh test path/to/mybb/root
+# Run only News tests
+$ ./shinka.sh test path/to/mybb/root -d path/to/mybb/root/inc/plugins/Shinka/News
+# Run specific tests
+$ ./shinka.sh test path/to/mybb/root -d path/to/tests
+```
+
+#### Release
 
 Versions should follow [Semantic Versioning standards](https://semver.org/).
 

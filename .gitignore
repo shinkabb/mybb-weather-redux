@@ -1,2 +1,2 @@
 *.zip
-src/inc/plugins/Shinka/Core/tests/data/config/database.php
+src/inc/plugins/Shinka/Core/Test/data/config/database.php

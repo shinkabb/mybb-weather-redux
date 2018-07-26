@@ -4,9 +4,9 @@ usage()
 {
 	echo "Usage: $0 <command>"
 	echo
-	echo "  link      Create symbolic links for plugin files and directories."
-	echo "  unlink    Destroy symbolic links for plugin files and directories."
-	echo "  relink    Destroy and create symbolic links for plugin files and directories."
+	echo "  link      Create hard links for plugin files and directories."
+	echo "  unlink    Destroy hard links for plugin files and directories."
+	echo "  relink    Destroy and create hard links for plugin files and directories."
 	echo "  release   Bundle source files for release."
 	echo "  test      Navigate to MyBB root and run PHPUnit tests."
 }
@@ -64,9 +64,6 @@ make_symlinks()
 	while [[ $# -gt 0 ]]
 	do
 		case "$1" in
-			-f | --force)
-				FORCE="-f"
-				shift;;
 			-h | --help)
 				link_usage
 				exit 1;;
@@ -78,22 +75,22 @@ make_symlinks()
 
 	if [ $MYBB_BASE ]
 	then
-		ln -s $FORCE "$PWD/src/news.php" "$MYBB_BASE/news.php" 
+		cp -Trl "$PWD/src/news.php" "$MYBB_BASE/news.php" 
 		echo "Linked news.php"
 		
-		ln -s $FORCE "$PWD/src/inc/plugins/news.php" "$MYBB_BASE/inc/plugins/news.php"
+		cp -Trl "$PWD/src/inc/plugins/news.php" "$MYBB_BASE/inc/plugins/news.php"
 		echo "Linked inc/plugins/news.php"
 		
-		ln -s $FORCE "$PWD/src/inc/languages/english/news.lang.php" "$MYBB_BASE/inc/languages/english/news.lang.php"
+		cp -Trl "$PWD/src/inc/languages/english/news.lang.php" "$MYBB_BASE/inc/languages/english/news.lang.php"
 		echo "Linked inc/languages/news.lang.php"
 		
-		ln -s $FORCE "$PWD/src/inc/languages/english/admin/news.lang.php" "$MYBB_BASE/inc/languages/english/admin/news.lang.php"
+		cp -Trl "$PWD/src/inc/languages/english/admin/news.lang.php" "$MYBB_BASE/inc/languages/english/admin/news.lang.php"
 		echo "Linked inc/languages/english/admin/news.lang.php"
 		
-		ln -s $FORCE "$PWD/src/inc/plugins/MybbStuff" "$MYBB_BASE/inc/plugins/MybbStuff"
+		cp -Trl "$PWD/src/inc/plugins/MybbStuff" "$MYBB_BASE/inc/plugins/MybbStuff"
 		echo "Linked inc/plugins/MybbStuff"
 		
-		ln -s $FORCE "$PWD/src/inc/plugins/Shinka" "$MYBB_BASE/inc/plugins/Shinka"
+		cp -Trl "$PWD/src/inc/plugins/Shinka" "$MYBB_BASE/inc/plugins/Shinka"
 		echo "Linked inc/plugins/Shinka"
 	else
 		link_usage
