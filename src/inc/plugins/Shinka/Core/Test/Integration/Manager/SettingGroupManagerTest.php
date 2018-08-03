@@ -2,6 +2,11 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Manager_SettingGroupManager
+ * @see     Shinka_Core_Manager_SettingGroupManager
+ * @package Shinka\Core\Test\Integration\Manager
+ */
 final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "settinggroups";
@@ -9,6 +14,9 @@ final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends
     protected $values;
     protected $entities = array();
 
+    /**
+     * Seeds setting groups.
+     */
     protected function seed()
     {
         global $db;
@@ -36,13 +44,22 @@ final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends
         $this->seed();
     }
 
+    /**
+     * Truncates table.
+     */
     protected function tearDown()
     {
         global $db;
         $db->delete_query($this->table, "");
     }
 
-    public function testCreate()
+    /**
+     * Should persist a setting group in the database.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         $originalCount = $this->countEntities();
 
@@ -53,7 +70,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends
         $this->assertEquals($originalCount + 1, $newCount);
     }
 
-    public function testDestroyEntity()
+    /**
+     * Should destroy a setting group from entity.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyEntity()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_SettingGroupManager::destroy($this->entities[0]);
@@ -63,7 +86,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends
         $this->assertEquals($expected, (int) $newCount);
     }
 
-    public function testDestroyString()
+    /**
+     * Should destroy a setting group from name.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyString()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_SettingGroupManager::destroy($this->entities[0]->name);
@@ -73,7 +102,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends
         $this->assertEquals($expected, (int) $newCount);
     }
 
-    public function testDestroyEntityArray()
+    /**
+     * Should destroy setting groups from array of entities.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyEntityArray()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_SettingGroupManager::destroy($this->entities);
@@ -83,7 +118,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingGroupManagerTest extends
         $this->assertEquals($expected, (int) $newCount);
     }
 
-    public function testDestroyStringArray()
+    /**
+     * Should destroy setting groups from array of names.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyStringArray()
     {
         $entities = array_map(function ($entity) {
             return $entity->name;

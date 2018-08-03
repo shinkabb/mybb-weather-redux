@@ -1,9 +1,9 @@
-<tr class="trow1 pinned-{$news->pinned} status-{$news->status}">
+<tr class="trow1 pinned-{$news->pinned} status-{$news->status}" data-template="news_item">
     <td>
         <div style="float: right;">
-            {$mark_as} {$delete}
+            {$pin} {$delete}
         </div>
-        {$important} {$news->tags}
+        {$pinned} {$tags}
         <a href="news.php?nid={$news->nid}">
             <b>{$news->headline}</b>
         </a>

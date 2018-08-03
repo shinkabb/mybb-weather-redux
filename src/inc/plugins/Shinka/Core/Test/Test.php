@@ -2,6 +2,11 @@
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Sets MyBB constants and includes autoloader.
+ * 
+ * @package Shinka\Core\Test
+ */
 class Shinka_Core_Test_Test extends TestCase
 {
     /**

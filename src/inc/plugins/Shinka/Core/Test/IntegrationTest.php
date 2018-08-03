@@ -5,6 +5,11 @@ require_once getcwd() . '/inc/functions.php';
 require_once getcwd() . '/inc/db_base.php';
 require_once getcwd() . '/inc/db_mysqli.php';
 
+/**
+ * Sets up MyBB globals and database connection.
+ * 
+ * @package Shinka\Core\Test
+ */
 class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
 {
 
@@ -24,39 +29,31 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
 
     protected static function setupMyBB()
     {
-        global $mybb;
+        global $mybb, $grouppermignore, $groupzerogreater;
         require_once MYBB_ROOT."inc/class_core.php";
         
-		$mybb = new MyBB;
+        $mybb = new MyBB;
     }
 
     protected static function setupCache()
     {
-        global $cache;
         require_once MYBB_ROOT.'inc/class_datacache.php';
+        global $cache;
 
         $cache = new datacache;
     }
 
     protected static function setupTemplates()
     {
-        global $templates;
         require_once MYBB_ROOT.'inc/class_templates.php';
+        global $templates;
 
         $templates = new templates;
     }
 
-    protected static function setupPlugins()
-    {
-        global $templates;
-        require_once MYBB_ROOT.'inc/class_plugins.php';
-
-        $plugins = new plugins;
-    }
-
     protected static function setupDatabase()
     {
-        require getcwd() . '/inc/plugins/Shinka/Core/Test/data/config/database.php';
+        require MYBB_ROOT.'/inc/plugins/Shinka/Core/Test/data/config/database.php';
         global $db;
 
         $db = new DB_MySQLi;
@@ -64,6 +61,43 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
         $db->connect($config['database']);
         $db->set_table_prefix(TABLE_PREFIX);
         $db->type = $config['database']['type'];
+    }
+
+    protected static function setupLang()
+    {
+        require_once MYBB_ROOT."inc/class_language.php";
+        global $lang;
+        
+        $lang = new MyLanguage;
+        $lang->set_path(MYBB_ROOT."inc/languages");
+    }
+
+    protected static function setupPlugins()
+    {
+        require_once MYBB_ROOT."inc/class_plugins.php";
+        global $plugins;
+        
+        $plugins = new pluginSystem;
+    }
+
+    protected static function setupTimer()
+    {
+        global $maintimer;
+
+        require_once MYBB_ROOT."inc/class_timers.php";
+        $maintimer = new timer();
+    }
+
+    /**
+     * Overrides MyBB settings.
+     *
+     * @param array $settings
+     */
+    protected function seedSettings($settings = array())
+    {
+        global $mybb;
+
+        $mybb->settings = $settings;
     }
 
     protected function setUp()
@@ -75,5 +109,8 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
         self::setupDatabase();
         self::setupCache();
         self::setupTemplates();
+        self::setupLang();
+        self::setupPlugins();
+        self::setupTimer();
     }
 }

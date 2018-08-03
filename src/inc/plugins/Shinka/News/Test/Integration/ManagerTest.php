@@ -180,6 +180,14 @@ final class Shinka_News_Test_Integration_ManagerTest extends Shinka_Core_Test_In
         }
     }
 
+    public function testAllWithLimit()
+    {
+        $limit = count($this->entities) - 1;
+        $newses = Shinka_News_Manager::all(array('limit' => $limit));
+
+        $this->assertEquals($limit, count($newses));
+    }
+
     public function testCount()
     {
         $count = Shinka_News_Manager::count();

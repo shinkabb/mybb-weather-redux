@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @package Shinka\Core\Entity
+ */
 class Shinka_Core_Entity_SettingGroup extends Shinka_Core_Entity_Entity
 {
     public const DEFAULTS = array(
@@ -8,16 +11,24 @@ class Shinka_Core_Entity_SettingGroup extends Shinka_Core_Entity_Entity
         "gid" => null
     );
 
-    public $name;
-    public $title;
-    public $description;
-    public $disporder;
-    public $isdefault;
+    /** @var int */
     public $gid;
 
-    /**
-     * Stores name and table definitions
-     */
+    /** @var string Key name */
+    public $name;
+
+    /** @var string Display name */
+    public $title;
+
+    /** @var string */
+    public $description;
+
+    /** @var int Display order */
+    public $disporder;
+
+    /** @var boolean True if core setting, false if plugin setting */
+    public $isdefault;
+
     public function __construct(string $name, string $title, string $description, 
         $disporder = self::DEFAULTS['disporder'], $isdefault = self::DEFAULTS['isdefault'], 
         $gid = self::DEFAULTS['gid'])
@@ -32,6 +43,11 @@ class Shinka_Core_Entity_SettingGroup extends Shinka_Core_Entity_Entity
         $this->setDefaults(self::DEFAULTS);
     }
 
+    /**
+     * Returns class properties as array.
+     *
+     * @return array
+     */
     public function toArray()
     {
         return array(
@@ -43,9 +59,14 @@ class Shinka_Core_Entity_SettingGroup extends Shinka_Core_Entity_Entity
         );
     }
 
+    /**
+     * Creates object from array.
+     *
+     * @return Shinka_Core_Entity_SettingGroup
+     */
     public static function fromArray(array $arr)
     {
-        return new Shinka_Core_Entity_SettingGroup(
+        return new self(
             $arr['name'], 
             $arr['title'], 
             $arr['description'], 

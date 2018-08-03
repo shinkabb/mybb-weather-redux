@@ -4,13 +4,23 @@ use PHPUnit\Framework\TestCase;
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_News_Service_InstallService
+ * @see     Shinka_News_Service_InstallService
+ * @package Shinka\News\Test\Integration\Service
+ */
 final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shinka_Core_Test_IntegrationTest
 {
-    /** @var string Absolute path */
+    /** @var string Absolute path to template resource directory */
     protected $template_dir;
-    /** @var string Absolute path */
+    /** @var string Absolute path to stylesheet resource directory */
     protected $stylesheet_dir;
 
+    /**
+     * Sets resource paths and seeds templates.
+     *
+     * @return void
+     */
     protected function setUp()
     {
         global $db;
@@ -24,10 +34,14 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
             'template' => $db->escape_string('{$header}'),
             'sid' => 1,
             'version' => '',
-            
         ));
     }
 
+    /**
+     * Truncates tables.
+     *
+     * @return void
+     */
     protected function tearDown()
     {
         global $db;
@@ -40,7 +54,13 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
         $db->delete_query("themestylesheets", "");
     }
 
-    public function testInstallCreatesTable()
+    /**
+     * Should create news table.
+     * 
+     * @test
+     * @covers ::handle
+     */
+    public function createsTable()
     {
         global $db;
 
@@ -50,7 +70,13 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
         $this->assertTrue($exists);
     }
 
-    public function testInstallCreatesSettingGroup()
+    /**
+     * Should insert setting group.
+     * 
+     * @test
+     * @covers ::handle
+     */
+    public function createsSettingGroup()
     {
         global $db;
 
@@ -62,7 +88,13 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testInstallCreatesSettings()
+    /**
+     * Should insert settings.
+     * 
+     * @test
+     * @covers ::handle
+     */
+    public function createsSettings()
     {
         global $db;
 
@@ -74,7 +106,13 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testInstallCreatesTemplateGroup()
+    /**
+     * Should insert template group.
+     * 
+     * @test
+     * @covers ::handle
+     */
+    public function createsTemplateGroup()
     {
         global $db;
 
@@ -86,7 +124,13 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testInstallCreatesTemplates()
+    /**
+     * Should insert templates from resource directory.
+     * 
+     * @test
+     * @covers ::handle
+     */
+    public function createsTemplates()
     {
         global $db;
 
@@ -98,7 +142,13 @@ final class Shinka_News_Test_Integration_Service_InstallServiceTest extends Shin
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testInstallCreatesStylesheets()
+    /**
+     * Should insert stylesheets from resource directory.
+     * 
+     * @test
+     * @covers ::handle
+     */
+    public function createsStylesheets()
     {
         global $db;
 

@@ -38,3 +38,6 @@ $l['news_caneditown_description'] = 'Whether users can edit their own news, rega
 
 $l['news_requirethread'] = 'Require Thread?';
 $l['news_requirethread_description'] = 'Whether submitted news must be associated with a thread.';
+
+$l['news_uninstall'] = 'Uninstall News';
+$l['news_uninstall_message'] = 'Do you want to drop the news table? <b>This will permanently delete all news.</b>';

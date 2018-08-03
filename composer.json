@@ -1,0 +1,19 @@
+{
+    "name": "shinka/news",
+    "description": "A submission-based news feed for featured threads and announcements.",
+    "type": "project",
+    "license": "Unlicense",
+    "homepage": "https://github.com/ShinkaDev-MyBB/News",
+    "authors": [
+        {
+            "name": "Kalyn Robinson",
+            "email": "kalyndrobinson@gmail.com",
+            "homepage": "https://github.com/kalynrobinson",
+            "role": "Developer"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "apigen/apigen": "^4.1"
+    }
+}

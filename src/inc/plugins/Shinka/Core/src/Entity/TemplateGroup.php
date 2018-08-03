@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @package Shinka\Core\Entity
+ */
 class Shinka_Core_Entity_TemplateGroup extends Shinka_Core_Entity_Entity
 {
     public const DEFAULTS = array(
@@ -9,18 +12,15 @@ class Shinka_Core_Entity_TemplateGroup extends Shinka_Core_Entity_Entity
     /** @var string Prefix templates should be grouped under */
     public $prefix;
 
-    /** @var string */
+    /** @var string Display name */
     public $title;
 
-    /** @var int */
+    /** @var int 1 if core template group, 0 if from plugin */
     public $isdefault = 1;
 
-    /** @var string */
+    /** @var string Directory with associated templates */
     public $asset_dir;
 
-    /**
-     * Store name and table definitions
-     */
     public function __construct(string $asset_dir, string $prefix, string $title, 
         $isdefault = self::DEFAULTS['isdefault'])
     {
@@ -32,6 +32,11 @@ class Shinka_Core_Entity_TemplateGroup extends Shinka_Core_Entity_Entity
         $this->setDefaults(self::DEFAULTS);
     }
 
+    /**
+     * Returns class properties as array.
+     *
+     * @return array
+     */
     public function toArray()
     {
         return array(
@@ -41,9 +46,15 @@ class Shinka_Core_Entity_TemplateGroup extends Shinka_Core_Entity_Entity
         );
     }
 
+    /**
+     * Creates object from array.
+     *
+     * @param  array $data 
+     * @return Shinka_Core_Entity_TemplateGroup
+     */
     public static function fromArray($data)
     {
-        return new Shinka_Core_Entity_TemplateGroup(
+        return new self(
             $data['asset_dir'], 
             $data['prefix'], 
             $data['title'], 

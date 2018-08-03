@@ -1,14 +1,19 @@
 <?php
 
+/**
+ * Manages database records for stylesheets.
+ *
+ * @see     Shinka_Core_Entity_Stylesheet
+ * @package Shinka\Core\Manager
+ */
 class Shinka_Core_Manager_StylesheetManager extends Shinka_Core_Manager_Manager
 {
     private static $table = "themestylesheets";
 
     /**
-     * Create templates from files in the given directory
+     * Creates templates from files in a directory.
      *
      * @param Shinka_Core_Entity_Stylesheet|Shinka_Core_Entity_Stylesheet[] $stylesheets
-     * @return void
      */
     public static function create($stylesheets)
     {
@@ -26,6 +31,8 @@ class Shinka_Core_Manager_StylesheetManager extends Shinka_Core_Manager_Manager
     }
 
     /**
+     * Deletes records by name and updates MyBB cache.
+     * 
      * @param Shinka_Core_Entity_Stylesheet|Shinka_Core_Entity_Stylesheet[] $stylesheets
      */
     public static function destroy($stylesheets)
@@ -39,6 +46,7 @@ class Shinka_Core_Manager_StylesheetManager extends Shinka_Core_Manager_Manager
 
             $db->delete_query(self::$table, "`name` = '$name'");
 
+            // Unlink stylesheet from themes
             $query = $db->simple_select("themes", "tid");
             while ($tid = $db->fetch_field($query, "tid")) {
                 $file = MYBB_ROOT . "cache/themes/theme$tid/$name";

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @package Shinka\Core\Entity
+ * @see https://docs.mybb.com/1.8/development/plugins/basics/ For valid `optionscode` values
+ */
 class Shinka_Core_Entity_Setting extends Shinka_Core_Entity_Entity
 {
     public const DEFAULTS = array(
@@ -7,19 +11,19 @@ class Shinka_Core_Entity_Setting extends Shinka_Core_Entity_Entity
         "gid" => null
     );
 
-    /** @var string */
+    /** @var string Key name */
     public $name;
 
-    /** @var string */
+    /** @var string Display name */
     public $title;
 
     /** @var string */
     public $description;
 
-    /** @var string */
+    /** @var string Input type, e.g. `yesno` or `groupselect` */
     public $optionscode;
 
-    /** @var */
+    /** @var string */
     public $value;
 
     /** @var int */
@@ -28,6 +32,14 @@ class Shinka_Core_Entity_Setting extends Shinka_Core_Entity_Entity
     /** @var int */
     public $gid;
 
+    /**
+     * <code>
+     * <?php
+     * $setting = new Shinka_Core_Entity_Setting("a_name", "A Title", "A description",
+     *                                           "groupselect", "-1", 5, 1);
+     * ?>
+     * </code>
+     */
     public function __construct(string $name, string $title, string $description, 
         string $optionscode, string $value, $disporder = self::DEFAULTS['disporder'], 
         $gid = self::DEFAULTS['gid'])
@@ -43,6 +55,11 @@ class Shinka_Core_Entity_Setting extends Shinka_Core_Entity_Entity
         $this->setDefaults(self::DEFAULTS);
     }
 
+    /**
+     * Returns class properties as array.
+     *
+     * @return array
+     */
     public function toArray()
     {
         return array(
@@ -56,9 +73,23 @@ class Shinka_Core_Entity_Setting extends Shinka_Core_Entity_Entity
         );
     }
 
-    public static function fromArray($data)
+    /**
+     * Creates object from array.
+     * 
+     * <code>
+     * <?php
+     * $data = array("name" => "a_name", "title" => "A Title", "description" => "A description", 
+     *               "optionscode" => "groupselect");
+     * $setting = Shinka_Core_Entity_Setting::fromArray($data);
+     * ?>
+     * </code>
+     *
+     * @param  array $data 
+     * @return Shinka_Core_Entity_Setting
+     */
+    public static function fromArray(array $data)
     {
-        return new Shinka_Core_Entity_Setting(
+        return new self(
             $data['name'],
             $data['title'],
             $data['description'],

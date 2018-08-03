@@ -4,6 +4,11 @@ use PHPUnit\Framework\TestCase;
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Entity_Table
+ * @see     Shinka_Core_Entity_Table
+ * @package Shinka\Core\Test\Unit\Entity
+ */
 final class Shinka_Core_Test_Unit_Entity_TableTest extends Shinka_Core_Test_Test
 {
     protected $values;
@@ -20,7 +25,13 @@ final class Shinka_Core_Test_Unit_Entity_TableTest extends Shinka_Core_Test_Test
         );
     }
 
-    public function testCreate()
+    /**
+     * Should set class properties correctly.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         $v = $this->values;
         $entity = new Shinka_Core_Entity_Table(
@@ -41,7 +52,13 @@ final class Shinka_Core_Test_Unit_Entity_TableTest extends Shinka_Core_Test_Test
         }
     }
 
-    public function testFromArray()
+    /**
+     * Should correctly set class properties from array of properties.
+     * 
+     * @test
+     * @covers ::fromArray
+     */
+    public function createFromArray()
     {
         $v = $this->values;
         $entity = Shinka_Core_Entity_Table::fromArray($v);
@@ -59,7 +76,13 @@ final class Shinka_Core_Test_Unit_Entity_TableTest extends Shinka_Core_Test_Test
         }
     }
 
-    public function testToArray()
+    /**
+     * Should return class properties as array.
+     * 
+     * @test
+     * @covers ::toArray
+     */
+    public function convertToArray()
     {
         $v = $this->values;
         $entity = Shinka_Core_Entity_Table::fromArray($v)->toArray();

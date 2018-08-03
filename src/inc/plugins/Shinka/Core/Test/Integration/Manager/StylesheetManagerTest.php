@@ -2,6 +2,11 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Manager_StylesheetManager
+ * @see     Shinka_Core_Manager_StylesheetManager
+ * @package Shinka\Core\Test\Integration\Manager
+ */
 final class Shinka_Core_Test_Integration_Manager_StylesheetManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "themestylesheets";
@@ -42,7 +47,13 @@ final class Shinka_Core_Test_Integration_Manager_StylesheetManagerTest extends S
         $db->delete_query($this->table, "");
     }
 
-    public function testCreate()
+    /**
+     * Should persist stylesheet from entity.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         global $db;
 
@@ -53,7 +64,13 @@ final class Shinka_Core_Test_Integration_Manager_StylesheetManagerTest extends S
         $this->assertEquals($originalCount + 1, $newCount);
     }
 
-    public function testCreateArray()
+    /**
+     * Should persist stylesheets from array of entity.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function createArray()
     {
         global $db;
 
@@ -64,6 +81,12 @@ final class Shinka_Core_Test_Integration_Manager_StylesheetManagerTest extends S
         $this->assertEquals($originalCount + count($this->entities), $newCount);
     }
 
+    /**
+     * Should destroy stylesheet from entity.
+     * 
+     * @test
+     * @covers ::create
+     */
     public function testDestroyEntity()
     {
         $originalCount = $this->countEntities();
@@ -74,6 +97,12 @@ final class Shinka_Core_Test_Integration_Manager_StylesheetManagerTest extends S
         $this->assertEquals($expected, (int) $newCount);
     }
 
+    /**
+     * Should destroy stylesheets from array of entities.
+     * 
+     * @test
+     * @covers ::create
+     */
     public function testDestroyEntityArray()
     {
         $originalCount = $this->countEntities();

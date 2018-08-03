@@ -4,6 +4,11 @@ use PHPUnit\Framework\TestCase;
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Entity_Stylesheet
+ * @see     Shinka_Core_Entity_Stylesheet
+ * @package Shinka\Core\Test\Unit\Entity
+ */
 final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test_Test
 {
     protected $values;
@@ -19,7 +24,13 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
         );
     }
 
-    public function testCreate()
+    /**
+     * Should set class properties correctly.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         $v = $this->values;
         $entity = new Shinka_Core_Entity_Stylesheet(
@@ -42,7 +53,13 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
         }
     }
 
-    public function testCreateSetsDefaults()
+    /**
+     * Should replace `null`s with default values.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function setDefaultsOnCreate()
     {
         $v = $this->values;
 
@@ -64,9 +81,15 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
         );
     }
 
-    public function testFromDirectory()
+    /**
+     * Should create entities for each file in an asset directory.
+     * 
+     * @test
+     * @covers ::fromDirectory
+     */
+    public function createFromDirectory()
     {
-        $entities = Shinka_Core_Entity_Stylesheet::fromDirectory(MYBB_ROOT . "inc/plugins/Shinka/Core/Test/data/stylesheets");
+        $entities = Shinka_Core_Entity_Stylesheet::fromDirectory(MYBB_ROOT . "inc/plugins/Shinka/Core/Test/resources/stylesheets");
 
         foreach ($entities as $ndx => $entity) {
             $this->assertInstanceOf(
@@ -86,7 +109,32 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
         }
     }
 
-    public function testToArray()
+    /**
+     * Should correctly set class properties from array of properties.
+     * 
+     * @test
+     * @covers ::fromArray
+     */
+    public function createFromArray()
+    {
+        $v = $this->values;
+        $entity = Shinka_Core_Entity_Stylesheet::fromArray($v);
+
+        foreach ($v as $key => $value) {
+            $this->assertEquals(
+                $entity->$key,
+                $value
+            );
+        }
+    }
+
+    /**
+     * Should return class properties as array.
+     * 
+     * @test
+     * @covers ::toArray
+     */
+    public function convertToArray()
     {
         $v = $this->values;
         $entity = new Shinka_Core_Entity_Stylesheet(
@@ -100,19 +148,6 @@ final class Shinka_Core_Test_Unit_Entity_StylesheetTest extends Shinka_Core_Test
             $entity->toArray(),
             $v
         );
-    }
-
-    public function testFromArray()
-    {
-        $v = $this->values;
-        $entity = Shinka_Core_Entity_Stylesheet::fromArray($v);
-
-        foreach ($v as $key => $value) {
-            $this->assertEquals(
-                $entity->$key,
-                $value
-            );
-        }
     }
 }
 

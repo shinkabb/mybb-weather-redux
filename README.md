@@ -61,9 +61,9 @@ $ ./shinka.sh link path/to/mybb/root
 
 #### Testing
 
-Copy `src/inc/plugins/Shinka/Core/Test/data/config/database.example.php` to `src/inc/plugins/Shinka/Core/Test/data/config/database.php` and update file to match your test database.
+Copy `src/inc/plugins/Shinka/Core/Test/resources/config/database.example.php` to `src/inc/plugins/Shinka/Core/Test/resources/config/database.php` and update file to match your test database.
 
-**Do not run on prod database.** Tables are truncated during testing.
+**Do not run on production database.** Tables are truncated during testing.
 
 ```bash
 # Run all tests

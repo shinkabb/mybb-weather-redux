@@ -2,6 +2,11 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Manager_TemplateGroupManager
+ * @see     Shinka_Core_Manager_TemplateGroupManager
+ * @package Shinka\Core\Test\Integration\Manager
+ */
 final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "templategroups";
@@ -43,7 +48,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $db->delete_query("templates", "");
     }
 
-    public function testCreate()
+    /**
+     * Should persist template group from entity.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateGroupManager::create($this->entities[0]);
@@ -53,10 +64,16 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testCreateTemplates()
+    /**
+     * Should persist templates from template group entity.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function createTemplates()
     {
         $entity = $this->entities[0];
-        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/data/templates';
+        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/resources/templates';
 
         $originalCount = $this->countEntities("templates");
         Shinka_Core_Manager_TemplateGroupManager::create($entity);
@@ -66,7 +83,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testCreateArray()
+    /**
+     * Should persist template groups from array of entities.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function createArray()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateGroupManager::create($this->entities);
@@ -76,7 +99,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testDestroyEntity()
+    /**
+     * Should destroy template group from entity.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyEntity()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateGroupManager::destroy($this->entities[0]);
@@ -86,7 +115,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testDestroyString()
+    /**
+     * Should destroy template group from prefix.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyString()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateGroupManager::destroy($this->entities[0]->prefix);
@@ -96,7 +131,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testDestroyEntityArray()
+    /**
+     * Should destroy template groups from array of entities.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyEntityArray()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateGroupManager::destroy($this->entities);
@@ -106,7 +147,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testDestroyStringArray()
+    /**
+     * Should destroy template groups from array of prefixes.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyStringArray()
     {
         $entities = array_map(function ($entity) {
             return $entity->prefix;
@@ -120,11 +167,17 @@ final class Shinka_Core_Test_Integration_Manager_TemplateGroupManagerTest extend
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testDestroyTemplates()
+    /**
+     * Should destroy templates.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyTemplates()
     {
         $entity = $this->entity();
 
-        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/data/templates';
+        $entity->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/resources/templates';
         Shinka_Core_Manager_TemplateGroupManager::create($entity);
 
         $originalCount = $this->countEntities("templates");

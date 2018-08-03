@@ -2,6 +2,11 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Manager_SettingManager
+ * @see     Shinka_Core_Manager_SettingManager
+ * @package Shinka\Core\Test\Integration\Manager
+ */
 final class Shinka_Core_Test_Integration_Manager_SettingManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "settings";
@@ -46,7 +51,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingManagerTest extends Shin
         $db->delete_query($this->table, "");
     }
 
-    public function testCreate()
+    /**
+     * Should persist setting.
+     *
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         $originalCount = $this->countEntities();
 
@@ -57,7 +68,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingManagerTest extends Shin
         $this->assertEquals($originalCount + 1, $newCount);
     }
 
-    public function testDestroy()
+    /**
+     * Should destroy settings from prefix.
+     *
+     * @test
+     * @covers ::destroy
+     */
+    public function destroy()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_SettingManager::destroy("test");
@@ -67,7 +84,13 @@ final class Shinka_Core_Test_Integration_Manager_SettingManagerTest extends Shin
         $this->assertEquals($expected, (int) $newCount);
     }
 
-    public function testDestroyArray()
+    /**
+     * Should destroy settings from array of prefixes.
+     *
+     * @test
+     * @covers ::destroy
+     */
+    public function destroyArray()
     {
         $entity = $this->entity(
             array("name" => "{$this->prefixes[1]}_1")

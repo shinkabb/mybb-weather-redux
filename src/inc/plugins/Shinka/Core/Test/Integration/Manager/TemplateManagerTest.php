@@ -2,6 +2,11 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Manager_TemplateManager
+ * @see     Shinka_Core_Manager_TemplateManager
+ * @package Shinka\Core\Test\Integration\Manager
+ */
 final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $table = "templates";
@@ -12,7 +17,7 @@ final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shi
     protected function setUp()
     {
         parent::setUp();
-        $this->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/data/templates';
+        $this->asset_dir = getcwd() . '/inc/plugins/Shinka/Core/Test/resources/templates';
         $this->prefixes = array("prefix");
     }
 
@@ -22,7 +27,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shi
         $db->delete_query($this->table, "");
     }
 
-    public function testCreate()
+    /**
+     * Should persist templates from asset directory.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         $originalCount = $this->countEntities();
         Shinka_Core_Manager_TemplateManager::create($this->asset_dir);
@@ -32,7 +43,13 @@ final class Shinka_Core_Test_Integration_Manager_TemplateManagerTest extends Shi
         $this->assertEquals($expected, $newCount);
     }
 
-    public function testDestroy()
+    /**
+     * Should persist templates from asset directory.
+     * 
+     * @test
+     * @covers ::destroy
+     */
+    public function destroy()
     {
         Shinka_Core_Manager_TemplateManager::create($this->asset_dir);
 

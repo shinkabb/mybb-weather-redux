@@ -4,9 +4,18 @@ use PHPUnit\Framework\TestCase;
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Entity_Entity
+ * @see     Shinka_Core_Entity_Entity
+ * @package Shinka\Core\Test\Unit\Entity
+ */
 final class Shinka_Core_Test_Unit_Entity_EntityTest extends Shinka_Core_Test_Test
 {
-    public function testCreate()
+    /**
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
 
         $entity = new Shinka_Core_Entity_Entity();
@@ -16,7 +25,13 @@ final class Shinka_Core_Test_Unit_Entity_EntityTest extends Shinka_Core_Test_Tes
         );
     }
 
-    public function testSetsDefaults()
+    /**
+     * Should replace null values with defaults.
+     *
+     * @test
+     * @covers ::create
+     */
+    public function setDefaults()
     {
         $defaults = array(
             "one" => 1,

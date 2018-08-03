@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * Manages database tables.
+ *
+ * @see     Shinka_Core_Entity_Table
+ * @package Shinka\Core\Manager
+ */
 class Shinka_Core_Manager_TableManager extends Shinka_Core_Manager_Manager
 {
     /**
      * @param Shinka_Core_Entity_Table|Shinka_Core_Entity_Table[] $tables
+     * @return int Exits with `-1` if any table already exists.
      */
     public static function create($tables)
     {
@@ -23,7 +30,7 @@ class Shinka_Core_Manager_TableManager extends Shinka_Core_Manager_Manager
     }
 
     /**
-     * @param Shinka_Core_Entity_Table|Shinka_Core_Entity_Table[]|string|string[] $table
+     * @param Shinka_Core_Entity_Table|Shinka_Core_Entity_Table[]|string|string[] $table Entity or table name
      */
     public static function drop($tables)
     {

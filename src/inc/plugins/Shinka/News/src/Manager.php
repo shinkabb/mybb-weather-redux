@@ -18,13 +18,13 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
         'LEFT JOIN ' . TABLE_PREFIX . 'users user ON user.uid = news.uid ';
 
     /**
-     * @param Shinka_News_Entity_News|Shinka_News_Entity_News[] $newses
+     * @param Shinka_News_Entity_News|Shinka_News_Entity_News[]|array $newses
      */
     public static function create($newses)
     {
         global $db;
-        
-        foreach (self::toArray($newses) as &$news) {
+
+        foreach (self::toArray($newses) as $ndx => &$news) {
             $nid = $db->insert_query(self::$table, $news->forInsert());
             $news->nid = $nid;
         }
@@ -69,16 +69,19 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
     public static function findByTag($tags)
     {
         global $db;
-        $query = self::$query . " WHERE news.nid = $nid";
+        $query = self::$query . "WHERE news.nid = $nid";
         $query = $db->write_query($query);
         return self::toObj($db->fetch_array($query));
     }
 
-    public static function all()
+    public static function all(array $options = array())
     {
         global $db;
 
-        $query = $db->write_query(self::$query);
+        $query = self::$query;
+        $query .= self::getOptions($options);
+
+        $query = $db->write_query($query);
         while ($row = $db->fetch_array($query)) {
             $newses[] = self::toObj($row);
         }
@@ -113,5 +116,20 @@ class Shinka_News_Manager extends Shinka_Core_Manager_Manager
         );
 
         return Shinka_News_Entity_News::fromArray($news);
+    }
+
+    private static function getOptions(array $options)
+    {
+        $query = array();
+
+        if (isset($options['limit'])) {
+            $query[] = "LIMIT {$options['limit']}";
+        }
+
+        if (isset($options['order_by'])) {
+            $query[] = "ORDER BY {$options['order_by']}";
+        }
+
+        return implode(" ", $query);
     }
 }

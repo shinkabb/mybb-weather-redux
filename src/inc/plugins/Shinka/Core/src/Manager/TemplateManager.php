@@ -1,15 +1,21 @@
 <?php
 
+/**
+ * Manages database records for templates.
+ *
+ * @see     Shinka_Core_Entity_Template
+ * @package Shinka\Core\Manager
+ */
 class Shinka_Core_Manager_TemplateManager extends Shinka_Core_Manager_Manager
 {
     private static $table = "templates";
 
     /**
-     * Create templates from files in the given directory
+     * Creates templates from files in a directory.
      *
-     * @param string  $asset_dir
-     * @param string  $sid
-     * @param string  $version
+     * @param  string $asset_dir Path to directory
+     * @param  string $sid       Template set ID
+     * @param  string $version   MyBB version
      * @return void
      */
     public static function create(string $asset_dir = '', string $sid = '-2', string $version = '')
@@ -35,7 +41,11 @@ class Shinka_Core_Manager_TemplateManager extends Shinka_Core_Manager_Manager
     }
 
     /**
-     * Delete templates with the given title prefix
+     * Deletes records by title prefix.
+     * 
+     * e.g. the prefix "shinka" would delete "shinka" and shinka_one".
+     * 
+     * @param string $prefix Title prefix
      */
     public function destroy(string $prefix)
     {

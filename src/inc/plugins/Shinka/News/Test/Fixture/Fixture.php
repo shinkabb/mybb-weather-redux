@@ -3,6 +3,7 @@
 class Shinka_News_Test_Fixture_Fixture {
     public static $defaults = array(
         'user' => array(
+            'username' => 'Test Username',
             'signature' => 'signature',
             'buddylist' => '',
             'ignorelist' => '',
@@ -11,6 +12,7 @@ class Shinka_News_Test_Fixture_Fixture {
             'usernotes' => ''
         ),
         'thread' => array(
+            'subject' => 'Test Subject',
             'notes' => ''
         ),
         'news' => array(
@@ -41,6 +43,8 @@ class Shinka_News_Test_Fixture_Fixture {
 
     public static function news($values = array())
     {
-        return array_merge(self::$defaults['news'], $values);
+        return Shinka_News_Entity_News::fromArray(
+            array_merge(self::$defaults['news'], $values)
+        );
     }
 }

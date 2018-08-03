@@ -1,18 +1,24 @@
 <?php
 
+/**
+ * Manages database records for template groups.
+ *
+ * @see     Shinka_Core_Entity_TemplateGroup
+ * @package Shinka\Core\Manager
+ */
 class Shinka_Core_Manager_TemplateGroupManager extends Shinka_Core_Manager_Manager
 {
     private static $table = "templategroups";
 
     /**
-     * @param Shinka_Core_Entity_TemplateGroup|Shinka_Core_Entity_TemplateGroup[] $template_group
+     * @param Shinka_Core_Entity_TemplateGroup|Shinka_Core_Entity_TemplateGroup[] $groups
      * @return void
      */
-    public static function create($template_groups)
+    public static function create($groups)
     {
         global $db;
 
-        foreach (self::toArray($template_groups) as $group) {
+        foreach (self::toArray($groups) as $group) {
             $db->insert_query(self::$table, $group->toArray());
 
             if ($group->asset_dir) {
@@ -22,14 +28,16 @@ class Shinka_Core_Manager_TemplateGroupManager extends Shinka_Core_Manager_Manag
     }
 
     /**
-     * @param string|string[]|Shinka_Core_Entity_TemplateGroup|Shinka_Core_Entity_TemplateGroup[] $prefixes
+     * Deletes records by prefix.
+     * 
+     * @param string|string[]|Shinka_Core_Entity_TemplateGroup|Shinka_Core_Entity_TemplateGroup[] $prefixes Entity or prefix
      */
-    public function destroy($template_groups)
+    public function destroy($groups)
     {
         global $db;
 
-        foreach (self::toArray($template_groups) as $template_group) {
-            $prefix = $template_group instanceof Shinka_Core_Entity_TemplateGroup ? $template_group->prefix : $template_group;
+        foreach (self::toArray($groups) as $group) {
+            $prefix = $group instanceof Shinka_Core_Entity_TemplateGroup ? $group->prefix : $group;
             $db->delete_query(self::$table, "`prefix` = '$prefix'");
 
             Shinka_Core_Manager_TemplateManager::destroy($prefix);

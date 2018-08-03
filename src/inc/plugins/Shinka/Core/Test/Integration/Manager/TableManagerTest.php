@@ -2,12 +2,15 @@
 
 require_once getcwd() . '/inc/plugins/Shinka/Core/Test/IntegrationTest.php';
 
+/**
+ * @coversDefaultClass Shinka_Core_Manager_TableManager
+ * @see     Shinka_Core_Manager_TableManager
+ * @package Shinka\Core\Test\Integration\Manager
+ */
 final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka_Core_Test_IntegrationTest
 {
     protected $entity = Shinka_Core_Entity_Table;
-    /** @var array */
     protected $values;
-    /** @var Shinka_Core_Entity_Table[] */
     protected $entities;
 
     protected function setUp()
@@ -36,7 +39,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         }
     }
 
-    public function testCreate()
+    /**
+     * Should create table from entity.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function create()
     {
         global $db;
 
@@ -46,7 +55,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         $this->assertTrue($exists);
     }
 
-    public function testCreateArray()
+    /**
+     * Should create tables from array of entities.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function createArray()
     {
         global $db;
 
@@ -56,7 +71,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         $this->assertTrue($exists);
     }
 
-    public function testCreateAlreadyExists()
+    /**
+     * Should not break if table already exists.
+     * 
+     * @test
+     * @covers ::create
+     */
+    public function createAlreadyExists()
     {
         global $db;
 
@@ -66,7 +87,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         $this->assertEquals($exit, -1);
     }
 
-    public function testDropEntity()
+    /**
+     * Should drop table from entity.
+     * 
+     * @test
+     * @covers ::drop
+     */
+    public function dropEntity()
     {
         global $db;
         
@@ -77,7 +104,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         $this->assertFalse($exists);
     }
 
-    public function testDropString()
+    /**
+     * Should drop table from table name.
+     * 
+     * @test
+     * @covers ::drop
+     */
+    public function dropString()
     {
         global $db;
         
@@ -88,7 +121,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         $this->assertFalse($exists);
     }
 
-    public function testDropEntityArray()
+    /**
+     * Should drop table from array of entities.
+     * 
+     * @test
+     * @covers ::drop
+     */
+    public function dropEntityArray()
     {
         global $db;
         
@@ -101,7 +140,13 @@ final class Shinka_Core_Test_Integration_Manager_TableManagerTest extends Shinka
         }
     }
 
-    public function testDropStringArray()
+    /**
+     * Should drop table from array of table names.
+     * 
+     * @test
+     * @covers ::drop
+     */
+    public function dropStringArray()
     {
         global $db;
 

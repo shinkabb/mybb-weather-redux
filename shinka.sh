@@ -41,7 +41,7 @@ release_usage()
 	echo "Bundle source files for release."
 	echo
 	echo "  -v <version>, --version <version>     Semantic version"
-	echo "                                        default: 1.0.0"
+	echo "                                        default: VERSION file contents"
 	echo "  -V <vendor>, --vendor <vendor>        Plugin vendor name"
 	echo "                                        default: shinka"
 	echo "  -c <code>, --code <code>              Plugin code name"
@@ -159,9 +159,13 @@ relink_symlinks()
 	make_symlinks $ARGS
 }
 
+bump()
+{
+
+}
+
 release()
 {
-	VERSION="1.0.0"
 	VENDOR="shinka"
 	CODE="news"
     while [[ $# -gt 0 ]]
@@ -181,6 +185,11 @@ release()
 				exit 1;;
 		esac
 	done
+
+	if [ -z "$VERSION" ]
+	then
+		VERSION=`cat VERSION`
+	fi
 
 	bundle $VENDOR $CODE $VERSION
 }
@@ -242,6 +251,7 @@ case $1 in
 		break
 		;;
 	release)
+		shift
 		release $@
 		break
 		;;
