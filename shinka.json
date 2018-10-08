@@ -1,0 +1,15 @@
+{
+    "link": {
+        "files": [
+            "src/news.php",
+            "src/inc/plugins/news.php",
+            "src/inc/languages/english/news.lang.php",
+            "src/inc/languages/english/admin/news.lang.php"
+        ],
+        "directories": ["src/inc/plugins/MybbStuff", "src/inc/plugins/Shinka"]
+    },
+    "mybb_root": "C:/Bitnami/wampstack-7.1.18-1/apache2/htdocs/mybb",
+    "vendor": "shinka",
+    "code": "news",
+    "version": "0.0.1-alpha.1"
+}

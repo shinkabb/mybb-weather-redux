@@ -17,6 +17,7 @@ Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) a
 -   Pin important news to the top of the feed
 -   Delete news
 -   Add prefixes that news can be tagged with
+-   Moderation to approve or deny pending news.
 
 ### Permissions
 
@@ -25,6 +26,8 @@ Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) a
 -   Usergroups that can mark news as important
 -   Usergroups that can delete news
 -   Usergroups that can edit news
+-   Usergroups that require moderator approval
+-   Usergroups that can approve or deny pending news
 
 ## Screenshots
 
@@ -38,17 +41,17 @@ Download the [latest release](https://github.com/ShinkaDev-MyBB/News/releases) a
 
 ```bash
 # Creates hard links for src files in MyBB installation
-$ ./shinka.sh link <mybb_path>
+$ shinka link
 # Destroys hard links
-$ ./shinka.sh unlink <mybb_path>
+$ shinka unlink
 # Runs tests
-$ ./shinka.sh test <mybb_path> [-d <test_path>]
+$ shinka test <mybb_path> [-d <test_path>]
 # Bundles src files for release
-$ ./shinka.sh release [-v <version> | --version <version>] [-V <vendor> | --vendor <vendor>] [-c <code> | --code <code>]
+$ shinka release [-v <version> | --version <version>] [-V <vendor> | --vendor <vendor>] [-c <code> | --code <code>]
 # Lists available commands
-$ ./shinka.sh --help
+$ shinka --help
 # Shows usage and options for command
-$ ./shinka.sh <command> --help
+$ shinka <command> --help
 ```
 
 #### Local Setup
@@ -56,10 +59,16 @@ $ ./shinka.sh <command> --help
 ```bash
 $ git clone https://github.com/ShinkaDev-MyBB/News.git
 $ cd News
-$ ./shinka.sh link path/to/mybb/root
+
+# Optional but recommended
+$ yarn global add shinka-cli
+# Update shinka.json with your MyBB root path
+$ yarn link
 ```
 
 #### Testing
+
+> This is a terrible, brute-force way to unit test code that relies on MyBB's library and database. If you have a better idea, open an issue or a pull request!
 
 Copy `src/inc/plugins/Shinka/Core/Test/resources/config/database.example.php` to `src/inc/plugins/Shinka/Core/Test/resources/config/database.php` and update file to match your test database.
 
@@ -79,5 +88,5 @@ $ ./shinka.sh test path/to/mybb/root -d path/to/tests
 Versions should follow [Semantic Versioning standards](https://semver.org/).
 
 ```bash
-$ ./shinka.sh release --version 0.0.1-alpha.2
+$ shinka release --version 0.0.1-alpha.2
 ```

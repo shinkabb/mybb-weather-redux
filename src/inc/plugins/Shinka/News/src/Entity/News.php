@@ -13,10 +13,10 @@ class Shinka_News_Entity_News extends Shinka_Core_Entity_Entity
     /** @var int ID */
     public $nid;
 
-    /** @var string  Terse subject */
+    /** @var string Terse subject */
     public $headline;
 
-    /** @var string  Body text */
+    /** @var string Body text */
     public $text;
 
     /** @var boolean Whether news should be pinned */
