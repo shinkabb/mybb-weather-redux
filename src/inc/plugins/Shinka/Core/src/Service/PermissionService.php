@@ -24,7 +24,7 @@ class Shinka_Core_Service_PermissionService
      * @param  integer|null $uid           User ID
      * @param  boolean      $checkSettings If no permission is found, look up
      *                                     setting with same key
-     * @return boolean|integer -1 if invalid key
+     * @return boolean
      */
     public static function can(string $perm, $user = null, $checkSettings = true)
     {
@@ -62,16 +62,12 @@ class Shinka_Core_Service_PermissionService
      */
     public static function canSetting($setting, $user)
     {
-        if (!isset($setting)) {
-            return -1;
+        if (!isset($setting) || $setting === "") {
+            return false;
         }
 
         if ($setting === "-1") {
             return true;
-        }
-        
-        if ($setting === "") {
-            return false;
         }
 
         return self::hasGroup($setting, $user);

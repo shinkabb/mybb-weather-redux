@@ -7,9 +7,7 @@ class Shinka_News_Service_SubmitNewsService
     public static function handle($data = null)
     {
         $data = $data ?: self::shapeData();
-        echo "hellooooo";
         $entity = Shinka_News_Entity_News::fromArray($data);
-        var_dump($entity);
 
         if ($entity->isValid()) {
             return Shinka_News_Manager::create($entity);

@@ -73,7 +73,7 @@ final class Shinka_News_Test_Integration_Presenter_NewsSubmitPresenterTest exten
     public function presentPin()
     {
         $this->settings = array("news_canpin" => "-1");
-        $this->seedSettings();
+        $this->seedSettings($this->settings);
 
         $this->presented = Shinka_News_Presenter_NewsSubmitPresenter::present();
         $this->templateIsPresented("news_submit_pin");

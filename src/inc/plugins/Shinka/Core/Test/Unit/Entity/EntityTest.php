@@ -11,6 +11,15 @@ require_once getcwd() . '/inc/plugins/Shinka/Core/Test/Test.php';
  */
 final class Shinka_Core_Test_Unit_Entity_EntityTest extends Shinka_Core_Test_Test
 {
+    public function dataIsValid() {
+        return array(
+            array("hello world", "required", true),
+            array(0, "required", true),
+            array("", "required", false),
+            array(null, "required", false),
+        );
+    }
+
     protected function tearDown() {
         Shinka_Core_Entity_Entity::$validate = null;
     }
@@ -83,63 +92,17 @@ final class Shinka_Core_Test_Unit_Entity_EntityTest extends Shinka_Core_Test_Tes
      * are met.
      *
      * @test
+     * @dataProvider dataIsValid
      * @covers ::isValid
      */
-    public function isValidWhenRequired()
+    public function isValid($value, $rule, $expected)
     {
         Shinka_Core_Entity_Entity::$validate = array(
-            "property" => "required"
+            "property" => $rule
         );
         $entity = new Shinka_Core_Entity_Entity();
-        $entity->property = "hello world";
-        $this->assertFalse($entity->isValid());
-    }
-
-    /**
-     * Should return false when null.
-     *
-     * @test
-     * @covers ::isValid
-     */
-    public function isNotValidWhenRequiredNull()
-    {
-        Shinka_Core_Entity_Entity::$validate = array(
-            "property" => "required"
-        );
-        $entity = new Shinka_Core_Entity_Entity();
-        $this->assertFalse($entity->isValid());
-    }
-
-    /**
-     * Should return false when blank.
-     *
-     * @test
-     * @covers ::isValid
-     */
-    public function isNotValidWhenRequiredBlank()
-    {
-        Shinka_Core_Entity_Entity::$validate = array(
-            "property" => "required"
-        );
-        $entity = new Shinka_Core_Entity_Entity();
-        $entity->property = "";
-        $this->assertFalse($entity->isValid());
-    }
-
-    /**
-     * Should return true when falsy but not null or blank.
-     *
-     * @test
-     * @covers ::isValid
-     */
-    public function isValidWhenRequiredFalsy()
-    {
-        Shinka_Core_Entity_Entity::$validate = array(
-            "property" => "required"
-        );
-        $entity = new Shinka_Core_Entity_Entity();
-        $entity->property = 0;
-        $this->assertFalse($entity->isValid());
+        $entity->property = $value;
+        $this->assertEquals($expected, $entity->isValid());
     }
 }
 

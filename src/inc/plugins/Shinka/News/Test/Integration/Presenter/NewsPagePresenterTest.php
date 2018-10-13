@@ -69,7 +69,7 @@ final class Shinka_News_Test_Integration_Presenter_NewsPagePresenterTest extends
      */
     public function presentPage()
     {
-        $this->templateIsPresented(self::$template, count($this->entities), $presented);
+        $this->templateIsPresented(self::$template, 1, $this->presented);
     }
 
     /**
@@ -105,6 +105,7 @@ final class Shinka_News_Test_Integration_Presenter_NewsPagePresenterTest extends
      */
     public function presentSubmit()
     {
+        global $mybb;
         $this->templateIsPresented("news_submit", 1);
     }
 
@@ -116,13 +117,10 @@ final class Shinka_News_Test_Integration_Presenter_NewsPagePresenterTest extends
      */
     public function testPresentsNoSubmit()
     {
-        $this->settings = array(
+        $this->seedSettings(array(
             "news_cansubmit" => ""
-        );
-        $this->seedSettings();
-
+        ));
         $presented = Shinka_News_Presenter_NewsPagePresenter::present();
-
         $this->templateIsNotPresented("news_submit", $presented);
     }
 }

@@ -120,7 +120,7 @@ final class Shinka_News_Test_Integration_LatestNewsServiceTest extends Shinka_Co
 
         $page = Shinka_News_Service_NewsPageService::handle();
         
-        $count = substr_count(page, 'data-template="news_item"');
+        $count = substr_count($page, 'data-template="news_item"');
         $this->assertEquals(count($this->entities), $count);
     }
 

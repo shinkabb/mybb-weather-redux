@@ -17,6 +17,7 @@ class Shinka_News_Presenter_NewsPagePresenter extends Shinka_News_Presenter_Pres
         }
 
         $news = Shinka_News_Presenter_NewsPresenter::present($newses);
+
         if (Shinka_Core_Entity_User::can("news_cansubmit")) {
             $news_submit = eval($templates->render('news_submit'));
         }
