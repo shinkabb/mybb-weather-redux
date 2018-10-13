@@ -10,13 +10,21 @@ class Shinka_News_Entity_News extends Shinka_Core_Entity_Entity
         'thread' => array() 
     );
 
+    /** @todo Handle setting to not require thread */
+    public static $validate = array(
+        "headline" => "required",
+        "text" => "required",
+        "user.uid" => "required|exists:users:uid",
+        "thread.tid" => "required|exists:threads:tid"
+    );
+
     /** @var int ID */
     public $nid;
 
-    /** @var string Terse subject */
+    /** @var string  Terse subject */
     public $headline;
 
-    /** @var string Body text */
+    /** @var string  Body text */
     public $text;
 
     /** @var boolean Whether news should be pinned */
@@ -83,10 +91,10 @@ class Shinka_News_Entity_News extends Shinka_Core_Entity_Entity
             $arr['text'],
             $arr['pinned'],
             $arr['status'],
-            $arr['created_at'],            
+            isset($arr['created_at']) ? $arr['created_at'] : null,            
             $arr['user'],
             $arr['thread'],
-            $arr['nid']
+            isset($arr['nid']) ? $arr['nid'] : null
         );
     }
 }

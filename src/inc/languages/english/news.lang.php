@@ -12,10 +12,10 @@ $l['news_unimportant'] = 'Unimportant';
 $l['news_delete'] = 'Delete';
 $l['news_filters'] = 'Filters';
 
-$l['news_title'] = 'Title';
+$l['news_headline'] = 'Headline';
 $l['news_text'] = 'Description';
 $l['news_tid'] = 'Thread ID';
-$l['news_tags'] = 'tags';
+$l['news_tags'] = 'Tags';
 
 $l['news_thread_required'] = 'Thread is required';
 $l['news_invalid_thread'] = 'Thread is not from a valid forum';

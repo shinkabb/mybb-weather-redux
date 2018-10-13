@@ -73,176 +73,176 @@ final class Shinka_News_Test_Integration_Presenter_NewsPresenterTest extends Shi
      * @test
      * @covers ::present
      */
-    public function presentSomething()
-    {
-        $this->templateIsPresented(self::$template);
-    }
+    // public function presentSomething()
+    // {
+    //     $this->templateIsPresented(self::$template);
+    // }
 
-    /**
-     * Should present from given array.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentSomethingFromArray()
-    {
-        $this->presented = Shinka_News_Presenter_NewsPresenter::present($this->entities);
-        $this->templateIsPresented(self::$template, count($this->entities));
-    }
+    // /**
+    //  * Should present from given array.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentSomethingFromArray()
+    // {
+    //     $this->presented = Shinka_News_Presenter_NewsPresenter::present($this->entities);
+    //     $this->templateIsPresented(self::$template, count($this->entities));
+    // }
 
-    /**
-     * Should include item's headline.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentHeadline()
-    {
-        $entity = $this->entities[0];
-        $this->isPresented($entity->headline);
-    }
+    // /**
+    //  * Should include item's headline.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentHeadline()
+    // {
+    //     $entity = $this->entities[0];
+    //     $this->isPresented($entity->headline);
+    // }
 
-    /**
-     * Should include item's pinned state.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentPinnedClass()
-    {
-        $entity = $this->entities[0];
-        $this->isPresented("pinned-$entity->pinned");
-    }
+    // /**
+    //  * Should include item's pinned state.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentPinnedClass()
+    // {
+    //     $entity = $this->entities[0];
+    //     $this->isPresented("pinned-$entity->pinned");
+    // }
 
-    /**
-     * Should include item's moderation status.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentStatusClass()
-    {
+    // /**
+    //  * Should include item's moderation status.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentStatusClass()
+    // {
 
-        $entity = $this->entities[0];
-        $this->isPresented("status-$entity->status");
-    }
+    //     $entity = $this->entities[0];
+    //     $this->isPresented("status-$entity->status");
+    // }
 
-    /**
-     * Should include item's user ID.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentUserID()
-    {
-        $user = $this->entities[0]->user;
-        $this->isPresented("uid={$user['uid']}");
-    }
+    // /**
+    //  * Should include item's user ID.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentUserID()
+    // {
+    //     $user = $this->entities[0]->user;
+    //     $this->isPresented("uid={$user['uid']}");
+    // }
 
-    /**
-     * Should include item's username.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentUsername()
-    {
-        $entity = $this->entities[0];
-        $this->isPresented($entity->user['username']);
-    }
+    // /**
+    //  * Should include item's username.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentUsername()
+    // {
+    //     $entity = $this->entities[0];
+    //     $this->isPresented($entity->user['username']);
+    // }
 
-    /**
-     * Should present news_thread when item has an associated thread.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentThread()
-    {
-        $this->templateIsPresented('news_thread');
-    }
+    // /**
+    //  * Should present news_thread when item has an associated thread.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentThread()
+    // {
+    //     $this->templateIsPresented('news_thread');
+    // }
 
-    /**
-     * Should include item's thread ID.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentThreadID()
-    {
-        $thread = $this->entities[0]->thread;
-        $this->isPresented("tid={$thread['tid']}");
-    }
+    // /**
+    //  * Should include item's thread ID.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentThreadID()
+    // {
+    //     $thread = $this->entities[0]->thread;
+    //     $this->isPresented("tid={$thread['tid']}");
+    // }
 
-    /**
-     * Should include item's thread subject.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentThreadSubject()
-    {
-        $thread = $this->entities[0]->thread;
-        $this->isPresented($thread['subject']);
-    }
+    // /**
+    //  * Should include item's thread subject.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentThreadSubject()
+    // {
+    //     $thread = $this->entities[0]->thread;
+    //     $this->isPresented($thread['subject']);
+    // }
 
-    /**
-     * Should not present news_thread when news has no associated thread.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentNoThread()
-    {
-        $entity = $this->entities[0];
-        $entity->thread = array();
-        $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
-        $this->templateIsNotPresented("news_thread");
-    }
+    // /**
+    //  * Should not present news_thread when news has no associated thread.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentNoThread()
+    // {
+    //     $entity = $this->entities[0];
+    //     $entity->thread = array();
+    //     $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
+    //     $this->templateIsNotPresented("news_thread");
+    // }
 
-    /**
-     * Should present news_pinned when item is pinned.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentPinned()
-    {
-        $this->templateIsPresented("news_pinned");
-    }
+    // /**
+    //  * Should present news_pinned when item is pinned.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentPinned()
+    // {
+    //     $this->templateIsPresented("news_pinned");
+    // }
 
-    /**
-     * Should not present news_pinned when item is not pinned.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentNotPinned()
-    {
-        $entity = $this->entities[0];
-        $entity->pinned = false;
-        $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
-        $this->templateIsNotPresented("news_pinned");
-    }
+    // /**
+    //  * Should not present news_pinned when item is not pinned.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentNotPinned()
+    // {
+    //     $entity = $this->entities[0];
+    //     $entity->pinned = false;
+    //     $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
+    //     $this->templateIsNotPresented("news_pinned");
+    // }
 
-    /**
-     * Should present news_pin when permitted.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentPin()
-    {
-        $this->settings = array(
-            "news_canpin" => "-1"
-        );
-        $this->seedSettings();
+    // /**
+    //  * Should present news_pin when permitted.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentPin()
+    // {
+    //     $this->settings = array(
+    //         "news_canpin" => "-1"
+    //     );
+    //     $this->seedSettings();
 
-        $entity = $this->entities[0];
-        $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
+    //     $entity = $this->entities[0];
+    //     $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
 
-        $this->templateIsPresented("news_pin");
-    }
+    //     $this->templateIsPresented("news_pin");
+    // }
 
     /**
      * Should not present news_pin when not permitted.
@@ -257,56 +257,59 @@ final class Shinka_News_Test_Integration_Presenter_NewsPresenterTest extends Shi
         );
         $this->seedSettings();
 
-        $this->templateIsNotPresented("news_pin");
-    }
-
-    /**
-     * Should present news_delete when permitted.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentDelete()
-    {
-        global $mybb;
-        $this->settings = array(
-            "news_candelete" => "-1"
-        );
-        $this->seedSettings();
-
         $entity = $this->entities[0];
         $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
 
-        $this->templateIsPresented("news_delete");
+        $this->templateIsNotPresented("news_pin");
     }
 
-    /**
-     * Should not present news_delete when not permitted.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentNotDelete()
-    {
-        $this->settings = array(
-            "news_candelete" => ""
-        );
-        $this->seedSettings();
+    // /**
+    //  * Should present news_delete when permitted.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentDelete()
+    // {
+    //     global $mybb;
+    //     $this->settings = array(
+    //         "news_candelete" => "-1"
+    //     );
+    //     $this->seedSettings();
 
-        $this->templateIsNotPresented("news_delete");
-    }
+    //     $entity = $this->entities[0];
+    //     $this->presented = Shinka_News_Presenter_NewsPresenter::present($entity);
 
-    /**
-     * Should present news_no_news when given no news.
-     * 
-     * @test
-     * @covers ::present
-     */
-    public function presentNoNews()
-    {
-        $this->presented = Shinka_News_Presenter_NewsPresenter::present(null);
+    //     $this->templateIsPresented("news_delete");
+    // }
 
-        $this->templateIsPresented("news_no_news");
-    }
+    // /**
+    //  * Should not present news_delete when not permitted.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentNotDelete()
+    // {
+    //     $this->settings = array(
+    //         "news_candelete" => ""
+    //     );
+    //     $this->seedSettings();
+
+    //     $this->templateIsNotPresented("news_delete");
+    // }
+
+    // /**
+    //  * Should present news_no_news when given no news.
+    //  * 
+    //  * @test
+    //  * @covers ::present
+    //  */
+    // public function presentNoNews()
+    // {
+    //     $this->presented = Shinka_News_Presenter_NewsPresenter::present(null);
+
+    //     $this->templateIsPresented("news_no_news");
+    // }
 }
 

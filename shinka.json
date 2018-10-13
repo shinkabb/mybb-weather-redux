@@ -6,7 +6,8 @@
             "src/inc/languages/english/news.lang.php",
             "src/inc/languages/english/admin/news.lang.php"
         ],
-        "directories": ["src/inc/plugins/MybbStuff", "src/inc/plugins/Shinka"]
+        "directories": ["src/inc/plugins/MybbStuff", "src/inc/plugins/Shinka"],
+        "toTrim": "src/"
     },
     "mybb_root": "C:/Bitnami/wampstack-7.1.18-1/apache2/htdocs/mybb",
     "vendor": "shinka",

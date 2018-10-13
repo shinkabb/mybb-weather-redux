@@ -1,5 +1,7 @@
 <?php
 
+require_once MYBB_ROOT . "inc/functions.php";
+
 class Shinka_News_Presenter_NewsPresenter extends Shinka_News_Presenter_Presenter
 {
     public static $table = "news";
@@ -38,7 +40,7 @@ class Shinka_News_Presenter_NewsPresenter extends Shinka_News_Presenter_Presente
 
     private static function presentItem($news)
     {
-        global $templates;
+        global $templates, $mybb;
 
         $news = $news instanceof Shinka_News_Entity_News ? $news : Shinka_News_Entity_News::fromArray($news);
 
@@ -57,6 +59,8 @@ class Shinka_News_Presenter_NewsPresenter extends Shinka_News_Presenter_Presente
         if ($thread = $news->thread) {
             $news_thread = eval($templates->render("news_thread"));
         }
+
+        $news->created_at = my_date($mybb->settings['dateformat'], strtotime("YYYY-MM-DD HH:mm:ss", $news->created_at));
 
         return eval($templates->render("news_item"));
     }

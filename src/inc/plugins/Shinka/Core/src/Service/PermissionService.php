@@ -95,7 +95,7 @@ class Shinka_Core_Service_PermissionService
     {
         // Strip out whitespace before exploding
         if (!is_array($groups)) {
-            $groups = str_replace(" ", "", $group);
+            $groups = str_replace(" ", "", $groups);
             $groups = explode(",", $groups);
         }
 

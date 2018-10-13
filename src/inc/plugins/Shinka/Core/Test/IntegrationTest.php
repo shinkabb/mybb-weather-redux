@@ -53,7 +53,7 @@ class Shinka_Core_Test_IntegrationTest extends Shinka_Core_Test_Test
 
     protected static function setupDatabase()
     {
-        require MYBB_ROOT.'/inc/plugins/Shinka/Core/Test/data/config/database.php';
+        require MYBB_ROOT.'/inc/plugins/Shinka/Core/Test/resources/config/database.php';
         global $db;
 
         $db = new DB_MySQLi;

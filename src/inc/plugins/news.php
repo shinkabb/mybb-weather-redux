@@ -24,7 +24,7 @@ if (defined('IN_ADMINCP')) {
 
 defined('MYBBSTUFF_CORE_PATH') or define('MYBBSTUFF_CORE_PATH', MYBB_ROOT . 'inc/plugins/MybbStuff/Core');
 defined('SHINKA_CORE_PATH') or define('SHINKA_CORE_PATH', MYBB_ROOT . 'inc/plugins/Shinka/Core');
-defined('SHINKA_QUERYBUILDER_PATH') or define('SHINKA_QUERYBUILDER_PATH', MYBB_ROOT . 'inc/plugins/Shinka/QueryBuilder');
+// defined('SHINKA_QUERYBUILDER_PATH') or define('SHINKA_QUERYBUILDER_PATH', MYBB_ROOT . 'inc/plugins/Shinka/QueryBuilder');
 define('SHINKA_NEWS_PATH', MYBB_ROOT . 'inc/plugins/Shinka/News');
 
 require_once MYBBSTUFF_CORE_PATH . '/ClassLoader.php';
