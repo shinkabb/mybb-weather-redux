@@ -1,3 +1,4 @@
 *.zip
 src/inc/plugins/Shinka/Core/Test/resources/config/database.php
 vendor/
+.idea/
