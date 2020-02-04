@@ -1,0 +1,45 @@
+<table class="Weather tborder php-code" cellspacing="0" cellpadding="5" border="0">
+    <thead>
+    <tr>
+        <td class="thead" colspan="5">
+            <div>
+                <strong>{$lang->weather}</strong>
+            </div>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="trow1">
+        <td width="25%">
+            <code>weather['status']</code>
+        </td>
+        <td>{$weather['status']}</td>
+    </tr>
+    <tr class="trow1">
+        <td width="25%">
+            <code>weather['temp']['metric']</code>
+        </td>
+        <td>{$weather['temp']['metric']}</td>
+    </tr>
+    <tr class="trow1">
+        <td width="25%">
+            <code>weather['temp']['imperial']</code>
+        </td>
+        <td>{$weather['temp']['imperial']}</td>
+    </tr>
+    <tr class="trow1">
+        <td width="25%">
+            <code>weather['icon']</code>
+        </td>
+        <td>{$weather['icon']}</td>
+    </tr>
+    <tr class="trow1">
+        <td width="25%">
+            <code>weather['iconCode']</code>
+        </td>
+        <td><img src="http://openweathermap.org/img/wn/{$weather['iconCode']}@2x.png" /></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<br/>

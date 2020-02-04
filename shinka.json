@@ -1,16 +1,16 @@
 {
     "link": {
         "files": [
-            "src/news.php",
-            "src/inc/plugins/news.php",
-            "src/inc/languages/english/news.lang.php",
-            "src/inc/languages/english/admin/news.lang.php"
+            "src/weather.php",
+            "src/inc/plugins/weather.php",
+            "src/inc/languages/english/weather.lang.php",
+            "src/inc/languages/english/admin/weather.lang.php"
         ],
         "directories": ["src/inc/plugins/MybbStuff", "src/inc/plugins/Shinka"],
         "toTrim": "src/"
     },
-    "mybb_root": "C:/Bitnami/wampstack-7.1.18-1/apache2/htdocs/mybb",
+    "mybb_root": "C:/laragon/www/mybb",
     "vendor": "shinka",
-    "code": "news",
+    "code": "weather",
     "version": "0.0.1-alpha.1"
 }
